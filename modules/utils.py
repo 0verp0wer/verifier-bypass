@@ -3,6 +3,7 @@ import base64
 import requests
 
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.5481.192 Safari/537.36"
+buildNumber = int(requests.get("https://raw.githubusercontent.com/EffeDiscord/discord-api/main/fetch").json()['client_build_number'])
 
 class Utils:
     def get_token_id(token):
@@ -14,8 +15,6 @@ class Utils:
         return base64.b64encode(json.dumps({"os":"Windows","browser":"Chrome","device":"","system_locale":"en-US","browser_user_agent":user_agent,"browser_version":"110.0.5481.192","os_version":"10","referrer":"","referring_domain":"","referrer_current":"","referring_domain_current":"","release_channel":"stable","client_build_number":buildNumber,"client_event_source":None}).encode()).decode()
     
     def get_headers(token):
-
-        buildNumber = int(requests.get("https://raw.githubusercontent.com/EffeDiscord/discord-api/main/fetch").json()['client_build_number'])
         x_properties = Utils.GetSuperProperties(buildNumber)
 
         cookie = Cookie()
